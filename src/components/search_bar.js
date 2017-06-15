@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'dva';
 
 function SearchBar({ dispatch, destination }) {
-
-  console.log(destination);
-
   function onSelectChange(event) {
     const selectdestination = event.target.value;
     console.warn(selectdestination);
@@ -15,13 +12,13 @@ function SearchBar({ dispatch, destination }) {
   }
 
   function GetOption() {
-    return destination.map((des) =>{
+    return destination.map((data) => {
       return (
         <option
-          key={des.title}
-          value={des.title}
+          key={data.title}
+          value={data.title}
         >
-          {des.title}
+          {data.title}
         </option>
       );
     });
@@ -40,9 +37,10 @@ function SearchBar({ dispatch, destination }) {
 }
 
 function mapStateToProps(state) {
-  const { destination } = state.destination;
+  const { destination, selectDestination } = state.destination;
   return {
     destination,
+    selectDestination,
   };
 }
 
