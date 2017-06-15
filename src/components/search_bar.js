@@ -1,49 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { bindActionCreators } from 'redux';
-import { routerRedux } from 'dva/router';
 
-class SearchBar extends Component {
+function SearchBar({ dispatch, destination }) {
 
-  renderList() {
-    return Object.keys(this.props.destination).map((key) => {
-      const destination = this.props.destination[key];
+  console.log(destination);
 
+  function onSelectChange(event) {
+    const selectdestination = event.target.value;
+    console.warn(selectdestination);
+    dispatch({
+      type: 'destination/select',
+      payload: selectdestination,
+    });
+  }
+
+  function GetOption() {
+    return destination.map((des) =>{
       return (
         <option
-          key={key}
-          value={key}
-          className="list-group-item"
+          key={des.title}
+          value={des.title}
         >
-          {destination.title}
+          {des.title}
         </option>
       );
     });
   }
 
-  render() {
-    return (
-      <div>
-        <div style={{ width: 600, height: 100 }} >
-          <label htmlFor="select" >請選擇到達地點:</label>
-          <select className="form-control">
-            {this.renderList()}
-          </select>
-        </div>
+  return (
+    <div>
+      <div style={{ width: 600, height: 100 }} >
+        <label htmlFor="select" >請選擇到達地點:</label>
+        <select onChange={onSelectChange.bind(this)} className="form-control">
+          {GetOption()}
+        </select>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 function mapStateToProps(state) {
-  console.log(state);
+  const { destination } = state.destination;
   return {
-    destination: state.destination.destination,
+    destination,
   };
 }
-
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ selectDestination: selectDestination }, dispatch);
-// }
 
 export default connect(mapStateToProps)(SearchBar);

@@ -7,6 +7,10 @@
         "transform-runtime"
       ]
     },
+    "extraBabelPlugins": [
+        "transform-runtime",
+       ["import", { "libraryName": "antd", "style": "css" }]
+      ],
     "production": {
       "extraBabelPlugins": [
         "transform-runtime"
