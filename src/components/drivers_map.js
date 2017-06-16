@@ -9,7 +9,9 @@ const SimpleMapExampleGoogleMap = withGoogleMap(props => (
   />
 ));
 
-function DriversMap({ dispatch, destination }) {
+function DriversMap({ dispatch, selectDestination }) {
+  console.log(selectDestination);
+
   return (
     <SimpleMapExampleGoogleMap
       containerElement={
@@ -24,6 +26,7 @@ function DriversMap({ dispatch, destination }) {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   const { destination, selectDestination } = state.destination;
   return {
     destination,

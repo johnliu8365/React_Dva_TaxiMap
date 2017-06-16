@@ -2,23 +2,25 @@ import React from 'react';
 import { connect } from 'dva';
 
 function SearchBar({ dispatch, destination }) {
+  console.log('destination:', destination);
   function onSelectChange(event) {
-    const selectdestination = event.target.value;
-    console.warn(selectdestination);
+    const num = event.target.value;
+    const selectDestination = destination[num];
     dispatch({
       type: 'destination/select',
-      payload: selectdestination,
+      payload: selectDestination,
     });
   }
 
   function GetOption() {
-    return destination.map((data) => {
+    return Object.keys(destination).map((data) => {
+      const Des = destination[data];
       return (
         <option
-          key={data.title}
-          value={data.title}
+          key={data}
+          value={data}
         >
-          {data.title}
+          {Des.title}
         </option>
       );
     });

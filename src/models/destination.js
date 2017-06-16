@@ -16,15 +16,14 @@ export default {
     save(state, { payload: { data: destination, selectDestination } }) {
       return { ...state, destination, selectDestination };
     },
+    select(state, { payload: selectDestination }) {
+      return { ...state,
+        selectDestination,
+      };
+    },
   },
 
   effects: {
-    *select({ payload: selectDestination }, { put }) {
-      yield put({
-        type: 'save',
-        payload: { selectDestination },
-      });
-    },
   },
 
   subscriptions: {
