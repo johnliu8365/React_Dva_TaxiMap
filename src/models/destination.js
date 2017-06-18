@@ -1,3 +1,4 @@
+import Location from '../data/sample_drivers_location';
 
 export default {
   namespace: 'destination',
@@ -10,6 +11,8 @@ export default {
       { title: 'Taipei Main Station', latitude: 25.047739, longitude: 121.517040 },
     ],
     selectDestination: null,
+    driversLocation: Location,
+    directions: null,
   },
 
   reducers: {
@@ -19,6 +22,11 @@ export default {
     select(state, { payload: selectDestination }) {
       return { ...state,
         selectDestination,
+      };
+    },
+    setDirections(state, { payload: result }) {
+      return { ...state,
+        directions: result,
       };
     },
   },

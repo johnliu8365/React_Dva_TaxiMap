@@ -1,5 +1,5 @@
-export default function driversLocation() {
-  return [
+export default {
+  "driversLocation": [
     {"id":"1472624542-98-25.0612060437064-121.536598889408", "latitude":25.0612060437064,"longitude":121.536598889408,"DriverId":879595, "DriverName": "張偉誠", "License": "GX-106"},
     {"id":"1472624726-19-25.0593013639487-121.548908579886", "latitude":25.0503013639487,"longitude":121.542308579886,"DriverId":551404, "DriverName": "王彥帆", "License": "FF-203"},
     {"id":"1472624635-98-25.0591834864715-121.546946254225", "latitude":25.0581834864715,"longitude":121.542946254225,"DriverId":161411, "DriverName": "蔡幼志", "License": "QU-797"},
@@ -26,5 +26,5 @@ export default function driversLocation() {
     // {"id":"1472624437-140-25.063087-121.538115", "latitude":25.063087,"longitude":121.538115,"DriverId":174463, "DriverName": "陸平盈", "License": "OG-465"},
     // {"id":"1472625078-118-25.060594-121.546589", "latitude":25.060594,"longitude":121.546589,"DriverId":868941, "DriverName": "張家真", "License": "ZH-266"},
     // {"id":"1472624423-116-25.059658-121.549387", "latitude":25.059658,"longitude":121.549387,"DriverId":506686, "DriverName": "陳俊映", "License": "QI-952"}
-  ];
-  }
+  ],
+};
