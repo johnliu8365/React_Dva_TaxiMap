@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'dva';
 
 function SearchBar({ dispatch, destination }) {
-  console.log('destination:', destination);
   function onSelectChange(event) {
     const num = event.target.value;
     const selectDestination = destination[num];

@@ -12,6 +12,7 @@ export default {
     ],
     selectDestination: null,
     driversLocation: Location,
+    myLocation: { latitude: null, longitude: null },
     directions: null,
   },
 
@@ -27,6 +28,11 @@ export default {
     setDirections(state, { payload: result }) {
       return { ...state,
         directions: result,
+      };
+    },
+    setMyLocation(state, { payload: result }) {
+      return { ...state,
+        myLocation: { latitude: result.lat, longitude: result.lng },
       };
     },
   },
