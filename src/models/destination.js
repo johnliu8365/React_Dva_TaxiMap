@@ -1,4 +1,4 @@
-import Location from '../data/sample_drivers_location';
+import Location from '../services/sample_drivers_destination';
 import * as mapService from '../services/map';
 
 export default {
@@ -12,14 +12,16 @@ export default {
       { title: 'Taipei Main Station', latitude: 25.047739, longitude: 121.517040 },
     ],
     selectDestination: null,
-    driversLocation: Location,
+    driversLocation: [],
     myLocation: { latitude: null, longitude: null },
     directions: null,
   },
 
   reducers: {
-    save(state, { payload: { data: destination, selectDestination } }) {
-      return { ...state, destination, selectDestination };
+    setDriversLocation(state, { payload: { data } }) {
+      return { ...state,
+        driversLocation: data,
+      };
     },
     select(state, { payload: selectDestination }) {
       return { ...state,
@@ -31,8 +33,7 @@ export default {
         directions: result,
       };
     },
-    SaveMyLocation(state, { payload: MyLocation }) {
-      // console.warn(MyLocation);
+    saveMyLocation(state, { payload: MyLocation }) {
       return { ...state,
         myLocation: { latitude: MyLocation.MyLocation.lat, longitude: MyLocation.MyLocation.lng },
       };
@@ -44,7 +45,7 @@ export default {
       const MyLocation = yield call(mapService.SetMyLocation);
       // console.warn(MyLocation);
       yield put({
-        type: 'SaveMyLocation',
+        type: 'saveMyLocation',
         payload: {
           MyLocation,
         },
@@ -53,5 +54,11 @@ export default {
   },
 
   subscriptions: {
+    setup({ dispatch, history }) {
+      return history.listen(() => {
+        const data = Location;
+        dispatch({ type: 'setDriversLocation', payload: { data } });
+      });
+    },
   },
 };
