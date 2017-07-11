@@ -1,4 +1,5 @@
 import Location from '../data/sample_drivers_location';
+import * as mapService from '../services/map';
 
 export default {
   namespace: 'destination',
@@ -30,14 +31,25 @@ export default {
         directions: result,
       };
     },
-    setMyLocation(state, { payload: result }) {
+    SaveMyLocation(state, { payload: MyLocation }) {
+      // console.warn(MyLocation);
       return { ...state,
-        myLocation: { latitude: result.lat, longitude: result.lng },
+        myLocation: { latitude: MyLocation.MyLocation.lat, longitude: MyLocation.MyLocation.lng },
       };
     },
   },
 
   effects: {
+    *getMyLocation(payload, { call, put }) {
+      const MyLocation = yield call(mapService.SetMyLocation);
+      // console.warn(MyLocation);
+      yield put({
+        type: 'SaveMyLocation',
+        payload: {
+          MyLocation,
+        },
+      });
+    },
   },
 
   subscriptions: {

@@ -5,14 +5,6 @@ import raf from 'raf';
 import taxi from '../../image/taxi.png';
 import mylocation from '../../image/mylocation.png';
 
-const geolocation = (
-  navigator.geolocation || {
-    getCurrentPosition: (success, failure) => {
-      failure('Your browser doesn\'t support geolocation.');
-    },
-  }
-);
-
 function DriversMap({ dispatch, selectDestination, driversLocation, directions, myLocation }) {
   const SimpleMapExampleGoogleMap = withGoogleMap(props => (
     <GoogleMap
@@ -67,14 +59,8 @@ function DriversMap({ dispatch, selectDestination, driversLocation, directions, 
   }
 
   function SetMyLocation() {
-    geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-
-      dispatch({
-        type: 'destination/setMyLocation',
-        payload: { lat, lng },
-      });
+    dispatch({
+      type: 'destination/getMyLocation',
     });
   }
 
@@ -99,17 +85,11 @@ function DriversMap({ dispatch, selectDestination, driversLocation, directions, 
     });
   }
 
-  // function handleMarkerClick(targetMarker) {
-  //   targetMarker.showInfo = true;
-  //   return targetMarker;
-  // }
-
-  if (!selectDestination) {
+  if (selectDestination === null) {
     SetMyLocation();
     return <div>請選擇司機目的地</div>;
   }
   SetDirections();
-  // console.log(SetDirections());
 
   return (
     <SimpleMapExampleGoogleMap
@@ -127,7 +107,7 @@ function DriversMap({ dispatch, selectDestination, driversLocation, directions, 
 }
 
 function mapStateToProps(state) {
-  // console.log(state);
+  console.log(state);
   const { selectDestination, driversLocation, directions, myLocation } = state.destination;
   return {
     selectDestination,
