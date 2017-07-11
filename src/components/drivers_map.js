@@ -13,7 +13,6 @@ function DriversMap({ dispatch, selectDestination, driversLocation, directions, 
     >
 
       {props.markers.map((marker, index) => {
-        {/*console.log(marker);*/}
         return (
           <Marker
             key={index}
@@ -65,23 +64,9 @@ function DriversMap({ dispatch, selectDestination, driversLocation, directions, 
   }
 
   function SetDirections() {
-    const DirectionsService = new google.maps.DirectionsService();
-
-    DirectionsService.route({
-      origin: { lat: myLocation.latitude, lng: myLocation.longitude },
-      destination: { lat: selectDestination.latitude, lng: selectDestination.longitude },
-      travelMode: google.maps.TravelMode.DRIVING,
-    }, (result, status) => {
-      // console.log(result);
-      if (status === google.maps.DirectionsStatus.OK) {
-        dispatch({
-          type: 'destination/setDirections',
-          payload: result,
-        });
-        // return result;
-      } else {
-        console.error(`error fetching directions ${result}`);
-      }
+    dispatch({
+      type: 'destination/getDirections',
+      payload: { selectDestination, myLocation },
     });
   }
 
@@ -103,6 +88,7 @@ function DriversMap({ dispatch, selectDestination, driversLocation, directions, 
       markers={DriversMarkerList()}
       directions={directions}
     />
+
   );
 }
 

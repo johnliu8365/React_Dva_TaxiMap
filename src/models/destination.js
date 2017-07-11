@@ -29,8 +29,10 @@ export default {
       };
     },
     setDirections(state, { payload: result }) {
+      // console.warn('setDirections:', result);
+
       return { ...state,
-        directions: result,
+        directions: result.result,
       };
     },
     saveMyLocation(state, { payload: MyLocation }) {
@@ -48,6 +50,17 @@ export default {
         type: 'saveMyLocation',
         payload: {
           MyLocation,
+        },
+      });
+    },
+    *getDirections({ payload: data }, { call, put }) {
+      // console.warn(selectDestination, myLocation);
+      const result = yield call(mapService.SetDirections, data);
+      // console.warn('getDirections:', result);
+      yield put({
+        type: 'setDirections',
+        payload: {
+          result,
         },
       });
     },
