@@ -13,6 +13,9 @@ export default {
     ],
     selectDestination: null,
     driversLocation: [],
+    targetMarker: {
+      id: null,
+    },
     myLocation: { latitude: null, longitude: null },
     directions: null,
   },
@@ -29,8 +32,6 @@ export default {
       };
     },
     setDirections(state, { payload: result }) {
-      // console.warn('setDirections:', result);
-
       return { ...state,
         directions: result.result,
       };
@@ -39,6 +40,10 @@ export default {
       return { ...state,
         myLocation: { latitude: MyLocation.MyLocation.lat, longitude: MyLocation.MyLocation.lng },
       };
+    },
+    handleMarkerClick(state, { payload: targetMarker }) {
+      console.warn(targetMarker);
+      return { ...state, targetMarker };
     },
   },
 
@@ -63,6 +68,9 @@ export default {
           result,
         },
       });
+    },
+    *updateState(payload, { update }) {
+      yield update({ payload });
     },
   },
 

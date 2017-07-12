@@ -20,7 +20,6 @@ export function SetMyLocation() {
 }
 
 export function SetDirections(data) {
-  console.log(data);
   const DirectionsService = new google.maps.DirectionsService();
 
   return new Promise((resolve, reject) => {
@@ -41,3 +40,4 @@ export function SetDirections(data) {
       return result;
     });
 }
+
