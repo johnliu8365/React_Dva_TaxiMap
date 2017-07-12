@@ -43,9 +43,14 @@ function DriversMap({ dispatch, selectDestination, driversLocation, directions, 
     });
   }
 
+  function onMarkerClose() {
+    dispatch({
+      type: 'destination/handleMarkerClose',
+    });
+  }
+
   function markerLocation() {
     return driversLocation.driversLocation.map((info) => {
-      // console.log('markerLocation', info.showInfo);
       return (
         <Marker
           key={info.id}
@@ -54,7 +59,7 @@ function DriversMap({ dispatch, selectDestination, driversLocation, directions, 
           onClick={() => onMarkerClick(info)}
         >
           { info.id === targetMarker.id && (
-            <InfoWindow >
+            <InfoWindow onCloseClick={() => onMarkerClose()}>
               <div>
                 {info.DriverName}
                 {info.License}
@@ -89,7 +94,6 @@ function DriversMap({ dispatch, selectDestination, driversLocation, directions, 
 }
 
 function mapStateToProps(state) {
-  // console.log('mapStateToProps:', state);
   const { selectDestination, driversLocation, directions,
      myLocation, targetMarker } = state.destination;
   return {

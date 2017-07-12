@@ -33,17 +33,21 @@ export default {
     },
     setDirections(state, { payload: result }) {
       return { ...state,
-        directions: result.result,
+        directions: result,
       };
     },
     saveMyLocation(state, { payload: MyLocation }) {
       return { ...state,
-        myLocation: { latitude: MyLocation.MyLocation.lat, longitude: MyLocation.MyLocation.lng },
+        myLocation: { latitude: MyLocation.lat, longitude: MyLocation.lng },
       };
     },
     handleMarkerClick(state, { payload: targetMarker }) {
-      console.warn(targetMarker);
       return { ...state, targetMarker };
+    },
+    handleMarkerClose(state) {
+      return { ...state,
+        targetMarker: { id: null },
+      };
     },
   },
 
@@ -53,24 +57,15 @@ export default {
       // console.warn(MyLocation);
       yield put({
         type: 'saveMyLocation',
-        payload: {
-          MyLocation,
-        },
+        payload: MyLocation,
       });
     },
     *getDirections({ payload: data }, { call, put }) {
-      // console.warn(selectDestination, myLocation);
       const result = yield call(mapService.SetDirections, data);
-      // console.warn('getDirections:', result);
       yield put({
         type: 'setDirections',
-        payload: {
-          result,
-        },
+        payload: result,
       });
-    },
-    *updateState(payload, { update }) {
-      yield update({ payload });
     },
   },
 
