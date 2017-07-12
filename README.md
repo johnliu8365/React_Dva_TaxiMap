@@ -1,4 +1,4 @@
-# React Taxi Map
+# React Dva Taxi Map
 
 Use Dva, Lightweight front-end framework based on [redux](https://github.com/reactjs/redux), [redux-saga](https://github.com/yelouafi/redux-saga) and [react-router@2.x](https://github.com/ReactTraining/react-router/tree/v2.8.1). (Inspired by [elm](http://elm-lang.org/) and [choo](https://github.com/yoshuawuyts/choo))
 to build a Taxi Map App
